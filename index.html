@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#F4F1EA" />
+    <title>ParkFolio - Island Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Nunito"', 'sans-serif'],
+              serif: ['"Nunito"', 'sans-serif'], 
+              mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
+            },
+            colors: {
+              brand: {
+                green: 'rgb(var(--brand-green) / <alpha-value>)', 
+                greenDark: 'rgb(var(--brand-green-dark) / <alpha-value>)',
+                teal: 'rgb(var(--brand-teal) / <alpha-value>)', 
+                tealDark: 'rgb(var(--brand-teal-dark) / <alpha-value>)', 
+                blue: 'rgb(var(--brand-blue) / <alpha-value>)', 
+                blueDark: 'rgb(var(--brand-blue-dark) / <alpha-value>)', 
+                yellow: 'rgb(var(--brand-yellow) / <alpha-value>)', 
+                yellowDark: 'rgb(var(--brand-yellow-dark) / <alpha-value>)', 
+                cream: 'rgb(var(--brand-cream) / <alpha-value>)', 
+                navBtn: 'rgb(var(--brand-navBtn) / <alpha-value>)', 
+                brown: 'rgb(var(--brand-brown) / <alpha-value>)', 
+                orange: 'rgb(var(--brand-orange) / <alpha-value>)', 
+                gray: 'rgb(var(--brand-gray) / <alpha-value>)',
+                beige: 'rgb(var(--brand-beige) / <alpha-value>)',
+                navBorder: 'rgb(var(--brand-navBorder) / <alpha-value>)',
+              }
+            },
+            boxShadow: {
+              'soft': '0 4px 20px -2px var(--shadow-color)',
+              'card': '0 8px 0 0 var(--shadow-color)',
+              'item': 'inset 0 0 0 2px var(--item-gloss)', // Inner gloss
+            },
+            borderRadius: {
+              'item': '12px',
+              '4xl': '2rem',
+              '5xl': '3rem',
+            },
+          }
+        }
+      }
+    </script>
+    <style>
+      :root {
+        --brand-green: 139 195 74;
+        --brand-green-dark: 85 139 47;
+        --brand-teal: 37 142 112;
+        --brand-teal-dark: 18 84 64;
+        --brand-blue: 100 181 246;
+        --brand-blue-dark: 13 71 161;
+        --brand-yellow: 253 240 166;
+        --brand-yellow-dark: 234 218 118;
+        --brand-cream: 244 241 234;
+        --brand-navBtn: 255 255 255;
+        --brand-brown: 74 63 53;
+        --brand-orange: 224 106 65;
+        --brand-gray: 232 230 225;
+        --brand-beige: 220 215 208;
+        --brand-navBorder: 255 255 255;
+        --shadow-color: rgba(74, 63, 53, 0.08);
+        --item-gloss: rgba(255,255,255,0.6);
+        --map-dots: rgba(255,255,255,0.7);
+        --scrollbar-track: rgba(74, 63, 53, 0.05);
+        --map-visited: 197 219 172;
+        --map-unvisited: 227 238 195;
+      }
+
+      .dark {
+        --brand-green: 106 156 58;
+        --brand-green-dark: 163 224 105;
+        --brand-teal: 30 122 96;
+        --brand-teal-dark: 94 219 184;
+        --brand-blue: 82 152 208;
+        --brand-blue-dark: 155 204 245;
+        --brand-yellow: 200 189 129;
+        --brand-yellow-dark: 240 231 176;
+        --brand-cream: 42 36 32; /* Deeper earthy tone */
+        --brand-navBtn: 54 46 41;
+        --brand-brown: 236 228 219; /* Light text for dark mode */
+        --brand-orange: 235 125 91;
+        --brand-gray: 61 53 46;
+        --brand-beige: 74 64 56;
+        --brand-navBorder: 74 64 56;
+        --shadow-color: rgba(0, 0, 0, 0.25);
+        --item-gloss: rgba(255,255,255,0.1);
+        --map-dots: rgba(255,255,255,0.05);
+        --scrollbar-track: rgba(255, 255, 255, 0.05);
+        --map-visited: 110 142 80;
+        --map-unvisited: 84 104 64;
+      }
+
+      body {
+        background-color: rgb(var(--brand-cream));
+        color: rgb(var(--brand-brown));
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      /* Map Background */
+      .pattern-map-dots {
+        background-color: rgb(var(--brand-cream));
+        background-image: radial-gradient(var(--map-dots) 2px, transparent 2px); 
+        background-size: 24px 24px;
+        transition: background-color 0.3s;
+      }
+
+      /* Inventory Card Pattern */
+      .pattern-card {
+        background-color: rgb(var(--brand-yellow));
+        background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15 18c-1.5 0-2.5-1-2.5-2.5v-1c0-1.5 1-2.5 2.5-2.5s2.5 1 2.5 2.5v1c0 1.5-1 2.5-2.5 2.5zm0-6c-2 0-3 1.5-3 3s1 3 3 3 3-1.5 3-3-1-3-3-3z' fill='%23eada76' fill-opacity='0.6' fill-rule='evenodd'/%3E%3C/svg%3E");
+      }
+      
+      .dark .pattern-card {
+        background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15 18c-1.5 0-2.5-1-2.5-2.5v-1c0-1.5 1-2.5 2.5-2.5s2.5 1 2.5 2.5v1c0 1.5-1 2.5-2.5 2.5zm0-6c-2 0-3 1.5-3 3s1 3 3 3 3-1.5 3-3-1-3-3-3z' fill='%23aba05e' fill-opacity='0.6' fill-rule='evenodd'/%3E%3C/svg%3E");
+      }
+
+      ::-webkit-scrollbar {
+        width: 12px;
+        background: transparent;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--scrollbar-track); 
+        border-radius: 10px;
+        margin: 4px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgb(var(--brand-yellow-dark)); 
+        border-radius: 10px;
+        border: 3px solid rgb(var(--brand-cream));
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgb(var(--brand-yellow)); 
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "framer-motion": "https://esm.sh/framer-motion@^12.23.26",
+    "topojson-client": "https://esm.sh/topojson-client@^3.1.0",
+    "d3": "https://esm.sh/d3@^7.9.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="font-sans antialiased overflow-hidden selection:bg-brand-teal selection:text-brand-brown">
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
